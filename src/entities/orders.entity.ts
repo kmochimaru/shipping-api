@@ -31,11 +31,11 @@ export class Orders {
     @ApiProperty()
     order_total: number;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'date', nullable: true })
     @ApiProperty()
     order_start_date: Date;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'date', nullable: true })
     @ApiProperty()
     order_end_date: Date;
 
