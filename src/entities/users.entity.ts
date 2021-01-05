@@ -14,7 +14,15 @@ export class Users {
     @ApiProperty()
     password: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     user_avatar: string;
+
+    @Column({ nullable: true })
+    @ApiProperty()
+    user_phone_number: string;
+
+    @Column({ nullable: true })
+    @ApiProperty()
+    user_email: string;
 }
