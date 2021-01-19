@@ -19,7 +19,7 @@ export class Orders {
     @ApiProperty()
     order_code: string;
 
-    @Column()
+    @Column({ default: 0 })
     @ApiProperty()
     order_discount: number;
 
@@ -31,27 +31,27 @@ export class Orders {
     @ApiProperty()
     order_total: number;
 
-    @Column({ type: 'date', nullable: true })
+    @Column({ nullable: true })
     @ApiProperty()
     order_start_date: Date;
 
-    @Column({ type: 'date', nullable: true })
+    @Column({ nullable: true })
     @ApiProperty()
     order_end_date: Date;
 
-    @Column()
+    @Column({ default: 0 })
     @ApiProperty()
     order_credit: number;
 
-    @Column({ type: 'text' })
+    @Column({ type: 'text', nullable: true })
     @ApiProperty()
     order_project?: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     order_ref_no?: string;
 
-    @Column({ type: 'text' })
+    @Column({ type: 'text', nullable: true })
     @ApiProperty()
     order_note?: string;
 
@@ -72,9 +72,9 @@ export class Orders {
     @ApiProperty()
     orders_item: OrdersItem[];
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
-    order_contact_company: string;
+    order_contact_company?: string;
 
     @Column({ nullable: true })
     @ApiProperty()
