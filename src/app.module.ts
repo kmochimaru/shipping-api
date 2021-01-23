@@ -1,3 +1,6 @@
+import { UploadsModule } from './modules/uploads/uploads.module';
+import { Attachments } from './entities/attachments.entity';
+import { AttachmentsModule } from './modules/attachments/attachments.module';
 import { OrdersItem } from './entities/orders-item.entity';
 import { OrdersModule } from './modules/orders/orders.module';
 import { Orders } from './entities/orders.entity';
@@ -20,12 +23,16 @@ import { Users } from './entities/users.entity';
       entities: [
         Users,
         Orders,
-        OrdersItem
+        OrdersItem,
+        Attachments
       ],
       synchronize: true,
+      // logging: ['query']
     }),
     UsersModule,
-    OrdersModule
+    OrdersModule,
+    AttachmentsModule,
+    UploadsModule
   ],
   controllers: [AppController],
   providers: [AppService],

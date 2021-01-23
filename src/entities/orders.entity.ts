@@ -1,3 +1,4 @@
+import { BaseEntity } from './../modules/shared/base.entity';
 import { ORDER_STATUS } from '../modules/orders/enum/order-status.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -10,7 +11,7 @@ import {
 import { OrdersItem } from './orders-item.entity';
 
 @Entity()
-export class Orders {
+export class Orders extends BaseEntity {
     @PrimaryGeneratedColumn()
     @ApiProperty()
     order_id: number;
