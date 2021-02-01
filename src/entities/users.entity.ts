@@ -1,6 +1,7 @@
+import { Attachments } from './attachments.entity';
 import { BaseEntity } from './../modules/shared/base.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Users extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -26,4 +27,9 @@ export class Users extends BaseEntity {
     @Column({ nullable: true })
     @ApiProperty()
     user_email: string;
+
+    @OneToOne(type => Attachments)
+    @JoinColumn({ name: 'attach_id' })
+    @ApiProperty()
+    attachments: Attachments;
 }

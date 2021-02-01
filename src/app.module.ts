@@ -1,3 +1,5 @@
+import { Products } from './entities/products.entity';
+import { ProductsModule } from './modules/products/products.module';
 import { UploadsModule } from './modules/uploads/uploads.module';
 import { Attachments } from './entities/attachments.entity';
 import { AttachmentsModule } from './modules/attachments/attachments.module';
@@ -24,7 +26,8 @@ import { Users } from './entities/users.entity';
         Users,
         Orders,
         OrdersItem,
-        Attachments
+        Attachments,
+        Products
       ],
       synchronize: true,
       // logging: ['query']
@@ -32,7 +35,8 @@ import { Users } from './entities/users.entity';
     UsersModule,
     OrdersModule,
     AttachmentsModule,
-    UploadsModule
+    UploadsModule,
+    ProductsModule
   ],
   controllers: [AppController],
   providers: [AppService],
