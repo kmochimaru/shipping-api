@@ -13,12 +13,16 @@ export class AuthController {
         @Res() res: any,
         @Body() data: { username: string, password: string }
     ) {
-        const resultUser = await this._auth.validateUsername('aaa');
+        const resultUser = await this._auth.validateUsername(data.username);
 
         if (!resultUser) {
             return await res.status(HttpStatus.FORBIDDEN).json({ message: 'ไม่พบชื่อผู้ใช้ในระบบ' })
         }
 
-        return resultUser;
+        if (!await this._auth.compareHash(data.password, resultUser.password)) {
+            return await res.status(HttpStatus.FORBIDDEN).json({ message: 'กรุณาตรวจชื่อผู้ใช้กับรหัสผ่านอีกครั้ง' })
+        }
+
+        return await res.json(resultUser);
     }
 }
