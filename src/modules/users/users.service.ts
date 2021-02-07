@@ -8,4 +8,8 @@ export class UsersService extends TypeOrmCrudService<Users>{
     constructor(@InjectRepository(Users) repo) {
         super(repo);
     }
+
+    async findByUsername(username: string): Promise<Users> {
+        return await this.repo.findOne({ username });
+    }
 }

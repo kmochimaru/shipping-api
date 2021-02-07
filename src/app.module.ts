@@ -1,3 +1,4 @@
+import { AuthModule } from './modules/auth/auth.module';
 import { Products } from './entities/products.entity';
 import { ProductsModule } from './modules/products/products.module';
 import { UploadsModule } from './modules/uploads/uploads.module';
@@ -36,7 +37,8 @@ import { Users } from './entities/users.entity';
     OrdersModule,
     AttachmentsModule,
     UploadsModule,
-    ProductsModule
+    ProductsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,7 +1,7 @@
 import { UsersService } from './users.service';
 import { Users } from './../../entities/users.entity';
-import { Controller, Get } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Body, Controller, Get } from '@nestjs/common';
+import { Crud, CrudController, Override, ParsedBody } from '@nestjsx/crud';
 import { ApiTags } from '@nestjs/swagger';
 
 @Crud({
@@ -29,4 +29,16 @@ export class UsersController implements CrudController<Users> {
     constructor(
         public service: UsersService
     ) { }
+
+    // get base(): CrudController<Users> {
+    //     return this;
+    // }
+
+    // @Override('createOneBase') 
+    // async createOneBase (
+    //     @ParsedBody() model: Users
+    // ) {
+
+    // }
+
 }
