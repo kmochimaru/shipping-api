@@ -35,7 +35,7 @@ export class UsersController implements CrudController<Users> {
     // }
 
     // @Override('createOneBase') 
-    // async createOneBase (
+    // async findAll (
     //     @ParsedBody() model: Users
     // ) {
 

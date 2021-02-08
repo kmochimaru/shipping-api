@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './jwt/jwt-auth.guard';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { LocalStrategy } from './jwt/local.strategy';
 import { SECRET_KEY } from './jwt/secret-key';
@@ -7,6 +8,7 @@ import { AuthController } from './controller/auth.controller';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -23,7 +25,11 @@ import { JwtModule } from '@nestjs/jwt';
   providers: [
     AuthService,
     LocalStrategy,
-    JwtStrategy
+    JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard
+    }
   ],
   exports: [
     AuthService,
