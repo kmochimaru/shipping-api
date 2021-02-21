@@ -30,10 +30,10 @@ export class AuthService {
     }
 
     async login(user: JwtPayload) {
-        const { _id, username, user_email, user_role, iat } = user;
+        const { user_id, username, user_email, user_role, iat } = user;
         return {
             access_token: this._jwtService.sign({
-                _id,
+                user_id,
                 username,
                 user_email,
                 user_role,
