@@ -3,7 +3,7 @@ import { ContactInfo } from './../../shared/interfaces/contact-info.interface';
 import { OrdersService } from '../service/orders.service';
 import { Orders } from '../../../entities/orders.entity';
 import { Controller, Get, Param, Req, Res } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
 import { ApiTags } from '@nestjs/swagger';
 import * as PDFDocument from 'pdfkit';
 import '../../shared/transform/currency';
@@ -30,10 +30,6 @@ import '../../shared/transform/currency';
 @Controller('api/v1/orders')
 @ApiTags('Orders')
 export class OrdersController implements CrudController<Orders> {
-    constructor(
-        public service: OrdersService
-    ) { }
-
     private _doc: any;
     private _now = new Date();
     private _year = this._now.getFullYear();
@@ -44,6 +40,26 @@ export class OrdersController implements CrudController<Orders> {
     private _regular = 'assets/fonts/THSarabunNew.ttf';
     private _bold = 'assets/fonts/THSarabunNew Bold.ttf';
     private _logo = 'assets/images/logo.png';
+
+    constructor(
+        public service: OrdersService
+    ) { }
+
+    @Override()
+    get base(): CrudController<Orders> {
+        return this;
+    }
+
+    @Override()
+    async createOne(
+        @ParsedRequest() params: CrudRequest,
+        @ParsedBody() order: Orders,
+        @Req() req: any
+    ) {
+        const { order_code } = await this.service.generateOrderCode();
+        order.order_code = order_code;
+        return this.base.createOneBase(params, order);
+    }
 
     @Get(':id/exports/pdf')
     async exportOrderPDF(@Res() res, @Req() req, @Param('id') id: number) {
