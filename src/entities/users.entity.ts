@@ -1,7 +1,7 @@
 import { Attachments } from './attachments.entity';
 import { BaseEntity } from './../modules/shared/base.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { BeforeInsert, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 const BCRYPT_HASH_ROUND = 8;
 @Entity()
@@ -35,9 +35,23 @@ export class Users extends BaseEntity {
     @ApiProperty()
     attachments: Attachments;
 
+    private tempPassword: string;
+
+    @AfterLoad()
+    private loadTempPassword(): void {
+        this.tempPassword = this.password;
+    }
+
     @BeforeInsert()
     private async encryptPassword(): Promise<void> {
         this.password = await this.hashPassword();
+    }
+
+    @BeforeUpdate()
+    private async checkEncryptPassword() {
+        if (this.tempPassword !== this.password) {
+            this.password = await this.hashPassword();
+        }
     }
 
     private async hashPassword(): Promise<string> {

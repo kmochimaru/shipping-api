@@ -1,7 +1,7 @@
 import { UsersService } from './users.service';
 import { Users } from './../../entities/users.entity';
-import { Body, Controller, Get } from '@nestjs/common';
-import { Crud, CrudController, Override, ParsedBody } from '@nestjsx/crud';
+import { Controller, Req } from '@nestjs/common';
+import { Crud, CrudController, Override, ParsedBody, ParsedRequest, CrudRequest } from '@nestjsx/crud';
 import { ApiTags } from '@nestjs/swagger';
 
 @Crud({
@@ -37,6 +37,15 @@ export class UsersController implements CrudController<Users> {
     // @Override('createOneBase') 
     // async findAll (
     //     @ParsedBody() model: Users
+    // ) {
+
+    // }
+
+    // @Override()
+    // async replaceOne(
+    //     @ParsedRequest() params: CrudRequest,
+    //     @ParsedBody() user: Users,
+    //     @Req() req: any
     // ) {
 
     // }
