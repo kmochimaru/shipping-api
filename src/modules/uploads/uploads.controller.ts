@@ -17,7 +17,9 @@ import { extname } from 'path';
 import { diskStorage } from 'multer';
 import * as mkdirp from 'mkdirp';
 import * as fs from 'fs';
+import { Public } from '../auth/jwt/jwt-auth.guard';
 
+@Public()
 @Controller('api/v1/uploads')
 export class UploadsController {
 

@@ -30,7 +30,7 @@ export class Users extends BaseEntity {
     @ApiProperty()
     user_email: string;
 
-    @OneToOne(type => Attachments)
+    @OneToOne(type => Attachments, { onDelete: 'SET NULL' })
     @JoinColumn({ name: 'attach_id' })
     @ApiProperty()
     attachments: Attachments;
