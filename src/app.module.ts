@@ -18,11 +18,11 @@ import { Users } from './entities/users.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '178.128.217.228',
+      host: '128.199.193.30',
       port: 33060,
       username: 'root',
-      password: 'hwsSeedsoft',
-      database: 'shipping',
+      password: 'IOTech21',
+      database: 'io',
       entities: [
         Users,
         Orders,
